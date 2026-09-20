@@ -1,4 +1,3 @@
-// 5道 高中+大学综合题目
 const quizData = [
     {
         question: "1. 万有引力定律的发现者是？",
@@ -32,7 +31,6 @@ let score = 0;
 const quizBox = document.getElementById('quiz-box');
 const resultDiv = document.getElementById('result');
 
-// 渲染当前题目
 function renderQuestion(){
     quizBox.innerHTML = "";
     const item = quizData[currentQuestion];
@@ -40,17 +38,14 @@ function renderQuestion(){
     div.className = "question";
     div.innerHTML = `<h3>${item.question}</h3>`;
     
-    // 渲染选项，点击选项直接进入下一题
     item.options.forEach(opt=>{
         const optDiv = document.createElement('div');
         optDiv.className = "option";
         optDiv.innerText = opt;
         optDiv.onclick = function(){
-            // 判断答案是否正确
             if(opt === item.answer){
                 score++;
             }
-            // 切换到下一题
             currentQuestion++;
             if(currentQuestion < quizData.length){
                 renderQuestion();
@@ -63,7 +58,6 @@ function renderQuestion(){
     quizBox.appendChild(div);
 }
 
-// 全部完成后展示结果
 function showResult(){
     quizBox.innerHTML = "";
     let output = `<h3>答题结束！你的得分：${score}/${quizData.length}</h3>`;
@@ -74,5 +68,4 @@ function showResult(){
     resultDiv.innerHTML = output;
 }
 
-// 初始加载第一题
-renderQuestion();
+document.addEventListener('DOMContentLoaded', renderQuestion);
